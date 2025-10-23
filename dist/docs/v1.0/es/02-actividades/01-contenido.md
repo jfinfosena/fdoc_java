@@ -59,7 +59,7 @@ public class EjerciciosActividad1 {
 
 ## Repositorio para fork
 
-- Enlace oficial del repositorio: https://github.com/example-org/sena-java-actividad-01 (actualice si cambia).
+- Enlace oficial del repositorio: [https://github.com/example-org/sena-java-actividad-01 (actualice si cambia).](https://github.com/jfinfosena/fdoc_java_act1.git)
 - Objetivo: realizar la actividad en un fork propio, implementando todos los ejercicios en el método `main`.
 
 ### Indicaciones
