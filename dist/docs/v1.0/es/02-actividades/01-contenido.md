@@ -1,320 +1,140 @@
 ---
-title: "Actividad: Probando tu API con Clientes REST"
+title: "Actividad 1: Ejercicios prácticos de Java"
 position: 1
-date: "2025-12-15"
+date: "2025-10-15"
 ---
 
-# 🧪 Actividad Práctica: Probando tu API con Diferentes Clientes REST
+Nota de implementación: realice cada ejercicio exclusivamente en el método main de una clase Java dentro de un proyecto de consola.
 
-En esta actividad aprenderás a probar tu API de FastAPI usando diferentes herramientas de cliente REST. Esta es una habilidad esencial para cualquier desarrollador backend.
+## Plantilla por ejercicios en main
 
-## 📋 Objetivos de la Actividad
+- Utilice el siguiente bloque para cada ejercicio. Duplíquelo y ajuste el número y el título según la sección correspondiente.
+- No agregue lógica fuera del `main`. Mantenga comentarios breves que describan objetivo, entradas y validaciones.
 
-Al completar esta actividad, serás capaz de:
+```java
+public class EjerciciosActividad1 {
+    public static void main(String[] args) {
+        // --- Declaración de variables ---       
+        // TODO: Implementación en main
 
-- Probar endpoints de tu API con Postman
-- Usar Thunder Client en VS Code
-- Realizar pruebas con herramientas online
-- Entender las respuestas HTTP y códigos de estado
-- Enviar diferentes tipos de datos (JSON, parámetros, headers)
+        // --- Identificadores ---       
+        // TODO: Implementación en main
 
----
+        // --- Identificadores ---       
+        // TODO: Implementación en main
 
-## 🚀 Preparación: Asegúrate de tener tu API corriendo
+        // --- Estilos de convención de codificación ---       
+        // TODO: Implementación en main
 
-Antes de comenzar, verifica que tu API de FastAPI esté funcionando:
+        // --- Tipos de datos primitivos ---       
+        // TODO: Implementación en main
 
-+++steps
-### Paso 1: Verificar que tu API esté activa
-Abre tu terminal y ejecuta:
+        // --- Tipos de datos no primitivos ---       
+        // TODO: Implementación en main
 
-`uvicorn main:app --reload`
+        // --- Operadores aritméticos ---       
+        // TODO: Implementación en main
 
-Deberías ver un mensaje similar a:
-```
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-```
+        // --- Operadores de asignación ---       
+        // TODO: Implementación en main
 
-### Paso 2: Probar el endpoint raíz
-Abre tu navegador y visita:
+        // --- Operadores de comparación ---       
+        // TODO: Implementación en main
 
-`http://localhost:8000/`
+        // --- Operadores lógicos ---       
+        // TODO: Implementación en main
 
-Deberías ver:
-`{"mensaje": "¡Hola, Mundo!"}`
+        // --- If ---       
+        // TODO: Implementación en main
 
-### Paso 3: Verificar la documentación
-Asegúrate de que Swagger UI esté disponible en:
+        // --- Switch ---       
+        // TODO: Implementación en main
 
-`http://localhost:8000/docs`
-+++
-
----
-
-## 🎯 Cliente 1: Thunder Client (VS Code)
-
-Thunder Client es una extensión ligera para VS Code perfecta para pruebas rápidas.
-
-+++admonition
----
-type: info
-title: "Instalación de Thunder Client"
----
-Si no tienes Thunder Client instalado:
-1. Abre VS Code
-2. Ve a Extensiones (Ctrl+Shift+X)
-3. Busca "Thunder Client"
-4. Haz clic en "Instalar"
----
-
-### Prueba 1: GET al endpoint raíz
-
-+++rest-client
----
-method: "GET"
-url: "http://localhost:8000/"
-headers:
-  Accept: "application/json"
----
-+++
-
-**Respuesta esperada:**
-```json
-{
-  "mensaje": "¡Hola, Mundo!"
-}
-```
-
-### Prueba 2: GET con parámetro de ruta
-
-Si creaste el endpoint `/saludo/{nombre}` en la lección 1:
-
-+++rest-client
----
-method: "GET"
-url: "http://localhost:8000/saludo/Ana"
-headers:
-  Accept: "application/json"
----
-+++
-
-**Respuesta esperada:**
-```json
-{
-  "saludo": "¡Hola, Ana!"
-}
-```
-
----
-
-## 🔧 Cliente 2: Postman
-
-Postman es la herramienta más popular para pruebas de API. Vamos a crear una colección.
-
-+++steps
-### Paso 1: Crear una colección
-1. Abre Postman
-2. Haz clic en "New Collection"
-3. Nómbrala "FastAPI Curso"
-4. Agrega una descripción: "Pruebas de mi API de FastAPI"
-
-### Paso 2: Crear tu primera petición
-1. Dentro de la colección, haz clic en "Add Request"
-2. Nombra la petición "GET Raíz"
-3. Selecciona método GET
-4. URL: `http://localhost:8000/`
-5. Haz clic en "Send"
-
-### Paso 3: Verificar la respuesta
-En la parte inferior verás:
-- **Status**: 200 OK
-- **Time**: Tiempo de respuesta (debe ser muy rápido)
-- **Size**: Tamaño de la respuesta
-- **Body**: El JSON con el mensaje
-+++
-
-### Peticiones adicionales en Postman
-
-+++admonition
----
-type: tip
-title: "Variables de entorno en Postman"
----
-Crea una variable de entorno llamada `base_url` con valor `http://localhost:8000` para no tener que escribir la URL completa en cada petición.
----
-
----
-
-## 🌐 Cliente 3: Herramientas Online
-
-Para pruebas rápidas sin instalar nada, puedes usar herramientas online.
-
-### Opción 1: Hoppscotch (https://hoppscotch.io)
-
-+++rest-client
----
-method: "GET"
-url: "http://localhost:8000/docs"
-headers:
-  Accept: "text/html"
----
-+++
-
-### Opción 2: ReqBin (https://reqbin.com)
-
-+++rest-client
----
-method: "GET"
-url: "http://localhost:8000/redoc"
-headers:
-  Accept: "text/html"
----
-+++
-
-+++admonition
----
-type: warning
-title: "Precaución con herramientas online"
----
-Las herramientas online no pueden acceder a `localhost`. Solo úsalas cuando tu API esté desplegada en un servidor público.
----
-
----
-
-## 📊 Análisis de Respuestas HTTP
-
-Es importante entender los códigos de estado HTTP que recibes.
-
-+++stat-cards
----
-columns: 4
-items:
-  - icon: "CheckCircleIcon"
-    value: "200"
-    label: "OK - Todo bien"
-    color: "green"
-  - icon: "ExclamationTriangleIcon"
-    value: "400"
-    label: "Bad Request - Error del cliente"
-    color: "yellow"
-  - icon: "XCircleIcon"
-    value: "404"
-    label: "Not Found - No existe"
-    color: "red"
-  - icon: "ServerIcon"
-    value: "500"
-    label: "Server Error - Error del servidor"
-    color: "red"
----
-+++
-
----
-
-## 🎯 Actividad Final: Crear tu propio endpoint
-
-Ahora que dominas las herramientas, crea un nuevo endpoint en tu API.
-
-+++steps
-### Paso 1: Agregar un endpoint POST
-Modifica tu `main.py` y agrega:
-
-```python
-from pydantic import BaseModel
-
-class Usuario(BaseModel):
-    nombre: str
-    edad: int
-
-@app.post("/usuarios/")
-def crear_usuario(usuario: Usuario):
-    return {
-        "mensaje": f"Usuario {usuario.nombre} creado exitosamente",
-        "datos": usuario
-    }
-```
-
-### Paso 2: Probar con Thunder Client
-1. Método: POST
-2. URL: `http://localhost:8000/usuarios/`
-3. Headers: `Content-Type: application/json`
-4. Body (raw JSON):
-```json
-{
-    "nombre": "Carlos",
-    "edad": 25
-}
-```
-
-### Paso 3: Verificar la respuesta
-Deberías recibir:
-```json
-{
-    "mensaje": "Usuario Carlos creado exitosamente",
-    "datos": {
-        "nombre": "Carlos",
-        "edad": 25
+        // --- Otros ejemplos ---       
+        // TODO: Implementación en main
+        
     }
 }
 ```
-+++
 
----
+## Repositorio para fork
 
-## 📋 Checklist de Entrega
+- Enlace oficial del repositorio: https://github.com/example-org/sena-java-actividad-01 (actualice si cambia).
+- Objetivo: realizar la actividad en un fork propio, implementando todos los ejercicios en el método `main`.
 
-Para completar esta actividad, asegúrate de:
+### Indicaciones
+- Realice un fork del repositorio en su cuenta de GitHub.
+- Clone su fork:
+  - `git clone https://github.com/<tu-usuario>/sena-java-actividad-01.git`
+  - `cd sena-java-actividad-01`
 
-+++steps
-### ✅ Realizar todas las pruebas
-- [ ] Probar endpoint GET `/` con Thunder Client
-- [ ] Probar endpoint GET `/saludo/{nombre}` con Thunder Client
-- [ ] Crear colección en Postman con al menos 3 peticiones
-- [ ] Probar tu nuevo endpoint POST con datos JSON
-- [ ] Verificar que todos los códigos de estado sean 200 OK
+### Criterios de evaluación
+- Correctitud de las soluciones y manejo de casos básicos.
+- Cumplimiento estricto de la implementación en el método `main`.
+- Organización del código, comentarios breves útiles y mensajes de commit claros.
+- No incluir soluciones fuera del `main` ni dependencias externas al JDK.
 
-### ✅ Documentar tus resultados
-- [ ] Captura de pantalla de Thunder Client con resultados
-- [ ] Captura de pantalla de Postman con tu colección
-- [ ] Captura del nuevo endpoint POST funcionando
-- [ ] Breve descripción de qué aprendiste
-+++
+## Declaración de variables
+- Implemente la declaración de una variable `int` y asigne un valor, imprimiéndolo luego en consola.
+- Escriba la declaración y asignación en una sola línea de una variable `double` y muestre su valor.
+- Desarrolle un programa que declare una variable `String`, le asigne un texto y lo imprima.
 
----
+## Identificadores
+- Escriba un programa que declare variables siguiendo `lowerCamelCase` para nombres descriptivos y las imprima.
+- Implemente una constante `final` en mayúsculas con guiones bajos y muestre su valor en consola.
+- Cree una clase nombrada en `PascalCase` y declare dentro una variable y un mensaje explicando la convención.
 
-## 🏆 Recursos Adicionales
+## Estilos de convención de codificación
+- Escriba un programa que use `lowerCamelCase` para variables y `PascalCase` para el nombre de la clase.
+- Implemente variables en `snake_case` válidas en Java e imprima sus valores.
+- Desarrolle un programa que incluya un comentario explicando por qué `kebab-case` no es válido para identificadores en Java.
 
-+++admonition
----
-type: success
-title: "¡Felicidades!"
----
-Al completar esta actividad, habrás dominado las herramientas esenciales para probar APIs REST. Estas habilidades son fundamentales para cualquier desarrollador backend moderno.
----
+## Tipos de datos primitivos
+- Implemente declaraciones de `byte`, `short`, `int`, `long`, `float`, `double`, `boolean` y `char`, imprimiendo sus valores.
+- Escriba un programa que realice una operación aritmética básica con enteros y muestre el resultado.
+- Cree un programa que use un `boolean` y un condicional para imprimir mensajes según su valor.
 
-### Recursos útiles:
-- [Documentación oficial de Thunder Client](https://docs.thunderclient.com)
-- [Guía de Postman para principiantes](https://learning.postman.com)
-- [Códigos de estado HTTP - MDN](https://developer.mozilla.org/es/docs/Web/HTTP/Status)
+## Tipos de datos no primitivos
+- Implemente un `String` con un texto y muéstrelo en consola.
+- Escriba un programa que declare un arreglo `int[]` de tamaño 3, asigne valores a sus posiciones y los imprima.
+- Desarrolle una clase simple `Persona` con `nombre` y `edad`, instánciela con `new Persona(...)` y muestre un mensaje con esos datos.
 
-### Próximos pasos:
-- Explora las funciones avanzadas de Postman (variables, ambientes, tests)
-- Aprende a crear documentación automática con Swagger
-- Practica con APIs públicas gratuitas
+## Operadores aritméticos 
+- Implemente un programa que calcule suma, resta, multiplicación, división y módulo de dos enteros.
+- Escriba un programa que muestre división entera y división decimal del mismo par de números.
+- Desarrolle un programa que demuestre incremento y decremento sobre una variable entera.
 
----
+## Operadores de asignación
+- Implemente un programa que use `+=` y `-=` sobre una variable y muestre el valor resultante.
+- Escriba un programa que use `*=` y `/=` con una variable `int` y muestre los cambios.
+- Desarrolle un programa que aplique `%=` y explique mediante impresiones el efecto del operador.
 
-```cta
----
-title: "¿Completaste la actividad?"
-buttons:
-  - text: "Ir a la Lección 2"
-    url: "/v1.0/es/01-contenido/02-contenido"
-    variant: "primary"
-    icon: "ArrowRightIcon"
-  - text: "Ver más actividades"
-    url: "/v1.0/es/02-actividades"
-    variant: "secondary"
----
-¡Excelente trabajo! Ahora estás listo para aprender sobre métodos HTTP y validación de datos.
-```
+## Operadores de comparación
+- Implemente comparaciones con `==` y `!=` entre dos enteros y muestre resultados booleanos.
+- Escriba comparaciones con `>`, `<`, `>=` y `<=` e imprima si se cumplen o no.
+- Desarrolle un programa que use un `if` para decidir mensajes basados en comparaciones de dos variables.
 
+## Operadores lógicos
+- Implemente expresiones con `&&` y `||` usando variables booleanas y muestre los resultados.
+- Escriba un programa que aplique `!` a una variable booleana y muestre el valor invertido.
+- Desarrolle un programa que combine operadores lógicos y paréntesis para evaluar una condición compuesta.
+
+## If
+- Implemente un `if` que imprima un mensaje si una variable `int` es mayor que otra.
+- Escriba un `if-else` que imprima mensajes distintos según si un valor cumple una condición.
+- Desarrolle un `if-else if-else` que clasifique un número en tres rangos e imprima la categoría.
+
+## Operador ternario
+- Implemente el operador ternario para decidir si una edad corresponde a "mayor de edad" o "menor de edad".
+- Escriba un operador ternario que calcule un descuento si la cantidad comprada supera un umbral.
+- Desarrolle un operador ternario que imprima si un número es par o impar.
+
+## Switch
+- Implemente un `switch` que convierta un día de la semana (cadena) en su número correspondiente.
+- Escriba un `switch` que convierta una calificación numérica en texto (Insuficiente a Excelente).
+- Desarrolle un `switch` que imprima la estación del año según un número entero.
+
+## Otros ejemplos
+- Implemente un programa que determine si un número es positivo, negativo o cero usando condicionales.
+- Escriba un programa que valide una contraseña comparándola con un valor esperado e imprima el resultado.
+- Desarrolle un programa que clasifique una calificación en categorías usando `if-else if-else` y muestre el texto correspondiente.
