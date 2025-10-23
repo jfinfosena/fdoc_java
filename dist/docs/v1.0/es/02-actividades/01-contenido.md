@@ -59,7 +59,7 @@ public class EjerciciosActividad1 {
 
 ## Repositorio para fork
 
-- Enlace oficial del repositorio: https://github.com/example-org/sena-java-actividad-01 (actualice si cambia).
+- Enlace oficial del repositorio:[ https://github.com/example-org/sena-java-actividad-01 (actualice si cambia)](https://github.com/jfinfosena/fdoc_java_act1.git).
 - Objetivo: realizar la actividad en un fork propio, implementando todos los ejercicios en el método `main`.
 
 ### Indicaciones
@@ -81,16 +81,6 @@ https://github.com/jfinfosena/fdoc_java_act1.git
 - Implemente la declaración de una variable `int` y asigne un valor, imprimiéndolo luego en consola.
 - Escriba la declaración y asignación en una sola línea de una variable `double` y muestre su valor.
 - Desarrolle un programa que declare una variable `String`, le asigne un texto y lo imprima.
-
-## Identificadores
-- Escriba un programa que declare variables siguiendo `lowerCamelCase` para nombres descriptivos y las imprima.
-- Implemente una constante `final` en mayúsculas con guiones bajos y muestre su valor en consola.
-- Cree una clase nombrada en `PascalCase` y declare dentro una variable y un mensaje explicando la convención.
-
-## Estilos de convención de codificación
-- Escriba un programa que use `lowerCamelCase` para variables y `PascalCase` para el nombre de la clase.
-- Implemente variables en `snake_case` válidas en Java e imprima sus valores.
-- Desarrolle un programa que incluya un comentario explicando por qué `kebab-case` no es válido para identificadores en Java.
 
 ## Tipos de datos primitivos
 - Implemente declaraciones de `byte`, `short`, `int`, `long`, `float`, `double`, `boolean` y `char`, imprimiendo sus valores.
