@@ -64,9 +64,12 @@ public class EjerciciosActividad1 {
 
 ### Indicaciones
 - Realice un fork del repositorio en su cuenta de GitHub.
+```bash
+https://github.com/jfinfosena/fdoc_java_act1.git
+```
 - Clone su fork:
-  - `git clone https://github.com/<tu-usuario>/sena-java-actividad-01.git`
-  - `cd sena-java-actividad-01`
+  - `git clone https://github.com/<tu-usuario>/fdoc_java_act1.git`
+  - `cd fdoc_java_act1`
 
 ### Criterios de evaluación
 - Correctitud de las soluciones y manejo de casos básicos.
