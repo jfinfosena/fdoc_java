@@ -46,7 +46,7 @@ public class EjerciciosActividad2 {
 ### Indicaciones
 - Realice un fork del repositorio en su cuenta de GitHub.
 ```bash
-https://github.com/jfinfosena/fdoc_java_act1.git
+https://github.com/jfinfosena/fdoc_java_act2.git
 ```
 - Clone su fork:
   - `git clone https://github.com/<tu-usuario>/fdoc_java_act2.git`
