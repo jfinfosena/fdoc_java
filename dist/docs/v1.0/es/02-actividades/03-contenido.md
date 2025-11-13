@@ -34,6 +34,17 @@ git clone https://github.com/TU_USUARIO/fdoc_java_act3.git
 cd fdoc_java_act3
 ```
 
+### Registro del grupo: info.json
+Antes de iniciar la preparación, diligencia el archivo `info.json` en la raíz del repositorio del líder con la siguiente estructura:
+
+```json
+{
+  "nombres": "",
+  "apellidos": "",
+  "grupo": "datos-#"
+}
+```
+
 ## Ejercicios de Programación
 
 Completa los siguientes 10 ejercicios en las funciones correspondientes del archivo `Main.java`:

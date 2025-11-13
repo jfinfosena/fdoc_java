@@ -52,6 +52,17 @@ https://github.com/jfinfosena/fdoc_java_act2.git
   - `git clone https://github.com/<tu-usuario>/fdoc_java_act2.git`
   - `cd fdoc_java_act2`
 
+### Registro del grupo: info.json
+Antes de iniciar la preparación, diligencia el archivo `info.json` en la raíz del repositorio del líder con la siguiente estructura:
+
+```json
+{
+  "nombres": "",
+  "apellidos": "",
+  "grupo": "datos-#"
+}
+```
+
 ### Criterios de evaluación
 - Correctitud de las soluciones y manejo de casos básicos.
 - Cumplimiento estricto de la implementación en el método `main`.
