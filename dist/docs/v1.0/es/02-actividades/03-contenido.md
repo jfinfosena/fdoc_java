@@ -8,14 +8,14 @@ date: 2025-11-13
 **¡Haz un fork del repositorio!**  
 Dirígete a:  
 ```
-https://github.com/jfinfocesde/act_lp_s11.git
+https://github.com/jfinfosena/fdoc_java_act3.git
 ```  
 y pulsa el botón **Fork** (esquina superior derecha).  
 Tras ello clónalo en tu equipo:
 
 ```bash
-git clone https://github.com/TU-USUARIO/act_lp_s11.git
-cd act_lp_s11
+git clone https://github.com/TU-USUARIO/fdoc_java_act3.git
+cd fdoc_java_act3
 ```
 
 ---
@@ -30,8 +30,8 @@ cd act_lp_s11
 
 ### Paso 2: Clonar tu Fork
 ```bash
-git clone https://github.com/TU_USUARIO/NOMBRE_DEL_REPO.git
-cd NOMBRE_DEL_REPO
+git clone https://github.com/TU_USUARIO/fdoc_java_act3.git
+cd fdoc_java_act3
 ```
 
 ## Ejercicios de Programación
