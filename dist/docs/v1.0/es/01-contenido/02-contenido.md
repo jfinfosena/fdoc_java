@@ -1,5 +1,5 @@
 ---
-title: "Clase 2 - Operadores y instrucciones de control condicional"
+title: "Operadores y instrucciones de control condicional"
 position: 2
 date: 2025-10-23
 ---

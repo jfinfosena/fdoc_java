@@ -1,5 +1,5 @@
 ---
-title: "Clase 3 - Estructuras de control en Java (Bucles)"
+title: "Estructuras de control en Java (Bucles)"
 position: 3
 date: 2025-10-28
 ---

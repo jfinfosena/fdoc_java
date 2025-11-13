@@ -1,8 +1,451 @@
 ---
-title: "Semana 4"
+title: "Estructuras de Datos en Java"
 position: 4
-date: 2025-11-04
+date: 2025-11-13
 ---
 
-# Semana 4
+Java proporciona herramientas poderosas para gestionar datos, desde arrays hasta el Collections Framework. Esta guía explora arrays, ArrayList y las principales colecciones con ejemplos prácticos, ayudándote a dominar su uso en Java.
+
+## ¿Qué es un array en Java?
+Un array (arreglo) en Java es una estructura de datos que permite almacenar múltiples elementos del mismo tipo en una sola variable. Los elementos se almacenan en posiciones consecutivas de memoria y se acceden mediante un índice (que comienza en 0).
+
+---
+
+### **1. Declaración de un array**
+Para usar un array, primero debes declararlo. Hay dos formas principales de hacerlo:
+
+#### **Sintaxis:**
+```java
+tipoDato[] nombreArray; // Forma preferida
+// o
+tipoDato nombreArray[]; // Alternativa válida, pero menos común
+```
+
+#### **Ejemplo:**
+```java
+int[] numeros;      // Declara un array de enteros
+String[] nombres;   // Declara un array de Strings
+```
+
+---
+
+### **2. Inicialización de un array**
+Un array debe inicializarse antes de usarse. Esto implica asignarle un tamaño o valores iniciales.
+
+#### **a) Especificando el tamaño:**
+Usas la palabra clave `new` junto con el tipo de dato y el tamaño entre corchetes.
+```java
+numeros = new int[5]; // Crea un array de 5 elementos (inicializados en 0 por defecto)
+```
+
+#### **b) Asignando valores directamente:**
+Puedes inicializar el array con valores específicos usando llaves `{}`.
+```java
+int[] numeros = {1, 2, 3, 4, 5}; // Array de 5 elementos con valores definidos
+String[] nombres = {"Ana", "Luis", "María"};
+```
+
+#### **Nota:**
+- Si inicializas directamente con valores, no necesitas especificar el tamaño; Java lo calcula automáticamente.
+- Si solo declaras el array (`int[] numeros;`) sin inicializarlo, no puedes usarlo hasta asignarle un tamaño o valores.
+
+---
+
+### **3. Acceso a elementos del array**
+Cada elemento del array se accede mediante su índice (posición), que va desde `0` hasta `tamaño - 1`.
+
+#### **Ejemplo:**
+```java
+int[] numeros = {10, 20, 30, 40};
+System.out.println(numeros[0]); // Imprime 10 (primer elemento)
+System.out.println(numeros[2]); // Imprime 30 (tercer elemento)
+```
+
+#### **Modificar un elemento:**
+```java
+numeros[1] = 50; // Cambia el segundo elemento de 20 a 50
+System.out.println(numeros[1]); // Imprime 50
+```
+
+#### **Cuidado:**
+Si intentas acceder a un índice fuera del rango (por ejemplo, `numeros[5]` en un array de tamaño 4), obtendrás una excepción: `ArrayIndexOutOfBoundsException`.
+
+---
+
+### **4. Propiedad `length`**
+El atributo `length` te permite obtener el tamaño del array.
+
+#### **Ejemplo:**
+```java
+int[] numeros = {1, 2, 3, 4, 5};
+System.out.println("Tamaño del array: " + numeros.length); // Imprime 5
+```
+
+---
+
+### **5. Recorrer un array**
+Puedes usar bucles para recorrer los elementos de un array.
+
+#### **a) Con un bucle `for` tradicional:**
+```java
+int[] numeros = {1, 2, 3, 4, 5};
+for (int i = 0; i < numeros.length; i++) {
+    System.out.println("Elemento en índice " + i + ": " + numeros[i]);
+}
+```
+
+#### **b) Con un bucle `for-each` (mejor para solo lectura):**
+```java
+int[] numeros = {1, 2, 3, 4, 5};
+for (int numero : numeros) {
+    System.out.println("Elemento: " + numero);
+}
+```
+
+---
+
+### **6. Arrays multidimensionales**
+Un array multidimensional es un "array de arrays". El más común es el bidimensional (como una matriz).
+
+#### **Declaración e inicialización:**
+```java
+int[][] matriz = new int[3][4]; // Matriz de 3 filas y 4 columnas
+// O con valores iniciales:
+int[][] matriz = {
+    {1, 2, 3},
+    {4, 5, 6},
+    {7, 8, 9}
+};
+```
+
+#### **Acceso a elementos:**
+```java
+System.out.println(matriz[0][1]); // Imprime 2 (fila 0, columna 1)
+matriz[1][2] = 10; // Cambia el valor en fila 1, columna 2 a 10
+```
+
+#### **Recorrer un array bidimensional:**
+```java
+for (int i = 0; i < matriz.length; i++) { // Filas
+    for (int j = 0; j < matriz[i].length; j++) { // Columnas
+        System.out.print(matriz[i][j] + " ");
+    }
+    System.out.println(); // Nueva línea por cada fila
+}
+```
+
+---
+
+### **7. Métodos útiles de la clase `Arrays`**
+Java proporciona la clase `java.util.Arrays` con métodos útiles para manipular arrays.
+
+#### **Ejemplos:**
+```java
+import java.util.Arrays;
+
+public class Ejemplo {
+    public static void main(String[] args) {
+        int[] numeros = {3, 1, 4, 1, 5};
+
+        // a) Ordenar el array
+        Arrays.sort(numeros);
+        System.out.println(Arrays.toString(numeros)); // Imprime [1, 1, 3, 4, 5]
+
+        // b) Convertir a String
+        String resultado = Arrays.toString(numeros);
+        System.out.println(resultado); // Imprime [1, 1, 3, 4, 5]
+
+        // c) Rellenar el array con un valor
+        Arrays.fill(numeros, 0);
+        System.out.println(Arrays.toString(numeros)); // Imprime [0, 0, 0, 0, 0]
+    }
+}
+```
+
+---
+
+### **8. Ejemplo práctico completo**
+Un programa que pide al usuario ingresar números en un array y luego calcula su promedio:
+
+```java
+import java.util.Scanner;
+
+public class Promedio {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Pedir tamaño del array
+        System.out.print("¿Cuántos números desea ingresar? ");
+        int tamaño = scanner.nextInt();
+
+        // Crear array
+        double[] numeros = new double[tamaño];
+
+        // Llenar el array
+        for (int i = 0; i < tamaño; i++) {
+            System.out.print("Ingrese el número " + (i + 1) + ": ");
+            numeros[i] = scanner.nextDouble();
+        }
+
+        // Calcular promedio
+        double suma = 0;
+        for (double num : numeros) {
+            suma += num;
+        }
+        double promedio = suma / tamaño;
+
+        // Mostrar resultado
+        System.out.println("El promedio es: " + promedio);
+
+        scanner.close();
+    }
+}
+```
+
+---
+
+## ¿Qué es ArrayList en Java?
+
+ArrayList es una clase del Collections Framework de Java que implementa una lista dinámica redimensionable. A diferencia de los arrays tradicionales, ArrayList puede cambiar su tamaño automáticamente durante la ejecución del programa.
+
+### **Características principales:**
+- **Tamaño dinámico**: Puede crecer o reducirse según sea necesario
+- **Tipo genérico**: Puede almacenar objetos de un tipo específico usando generics
+- **Métodos útiles**: Proporciona muchos métodos para manipular la lista
+- **Basado en arrays**: Internamente usa un array que se redimensiona automáticamente
+
+---
+
+### **1. Importar ArrayList**
+Para usar ArrayList, debes importar la clase desde `java.util`:
+
+```java
+import java.util.ArrayList;
+```
+
+---
+
+### **2. Declaración e inicialización de ArrayList**
+
+#### **Sintaxis básica:**
+```java
+ArrayList<TipoDato> nombreLista = new ArrayList<>();
+```
+
+#### **Ejemplos:**
+```java
+import java.util.ArrayList;
+
+public class EjemploArrayList {
+    public static void main(String[] args) {
+        // ArrayList de enteros
+        ArrayList<Integer> numeros = new ArrayList<>();
+        
+        // ArrayList de Strings
+        ArrayList<String> nombres = new ArrayList<>();
+        
+        // ArrayList con valores iniciales
+        ArrayList<String> frutas = new ArrayList<>();
+        frutas.add("Manzana");
+        frutas.add("Banana");
+        frutas.add("Naranja");
+    }
+}
+```
+
+---
+
+### **3. Métodos principales de ArrayList**
+
+#### **a) Agregar elementos:**
+```java
+ArrayList<String> lista = new ArrayList<>();
+
+// Agregar al final
+lista.add("Elemento 1");
+lista.add("Elemento 2");
+
+// Agregar en una posición específica
+lista.add(1, "Elemento insertado"); // Inserta en índice 1
+```
+
+#### **b) Acceder a elementos:**
+```java
+String elemento = lista.get(0); // Obtiene el primer elemento
+System.out.println(elemento);
+```
+
+#### **c) Modificar elementos:**
+```java
+lista.set(0, "Nuevo valor"); // Cambia el elemento en índice 0
+```
+
+#### **d) Eliminar elementos:**
+```java
+lista.remove(0); // Elimina por índice
+lista.remove("Elemento 2"); // Elimina por valor
+lista.clear(); // Elimina todos los elementos
+```
+
+#### **e) Información sobre la lista:**
+```java
+int tamaño = lista.size(); // Obtiene el tamaño
+boolean estaVacia = lista.isEmpty(); // Verifica si está vacía
+boolean contiene = lista.contains("Elemento 1"); // Verifica si contiene un elemento
+```
+
+---
+
+### **4. Recorrer un ArrayList**
+
+#### **a) Con bucle for tradicional:**
+```java
+ArrayList<String> nombres = new ArrayList<>();
+nombres.add("Ana");
+nombres.add("Luis");
+nombres.add("María");
+
+for (int i = 0; i < nombres.size(); i++) {
+    System.out.println("Índice " + i + ": " + nombres.get(i));
+}
+```
+
+#### **b) Con bucle for-each:**
+```java
+for (String nombre : nombres) {
+    System.out.println("Nombre: " + nombre);
+}
+```
+
+#### **c) Con forEach y lambda (Java 8+):**
+```java
+nombres.forEach(nombre -> System.out.println("Nombre: " + nombre));
+```
+
+---
+
+### **5. Ejemplo práctico completo**
+Un programa que gestiona una lista de estudiantes:
+
+```java
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class GestorEstudiantes {
+    public static void main(String[] args) {
+        ArrayList<String> estudiantes = new ArrayList<>();
+        Scanner scanner = new Scanner(System.in);
+        int opcion;
+
+        do {
+            System.out.println("\n=== GESTOR DE ESTUDIANTES ===");
+            System.out.println("1. Agregar estudiante");
+            System.out.println("2. Mostrar estudiantes");
+            System.out.println("3. Buscar estudiante");
+            System.out.println("4. Eliminar estudiante");
+            System.out.println("5. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = scanner.nextInt();
+            scanner.nextLine(); // Limpiar buffer
+
+            switch (opcion) {
+                case 1:
+                    System.out.print("Ingrese el nombre del estudiante: ");
+                    String nombre = scanner.nextLine();
+                    estudiantes.add(nombre);
+                    System.out.println("Estudiante agregado exitosamente.");
+                    break;
+
+                case 2:
+                    if (estudiantes.isEmpty()) {
+                        System.out.println("No hay estudiantes registrados.");
+                    } else {
+                        System.out.println("\nLista de estudiantes:");
+                        for (int i = 0; i < estudiantes.size(); i++) {
+                            System.out.println((i + 1) + ". " + estudiantes.get(i));
+                        }
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Ingrese el nombre a buscar: ");
+                    String buscar = scanner.nextLine();
+                    if (estudiantes.contains(buscar)) {
+                        int indice = estudiantes.indexOf(buscar);
+                        System.out.println("Estudiante encontrado en la posición: " + (indice + 1));
+                    } else {
+                        System.out.println("Estudiante no encontrado.");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Ingrese el nombre del estudiante a eliminar: ");
+                    String eliminar = scanner.nextLine();
+                    if (estudiantes.remove(eliminar)) {
+                        System.out.println("Estudiante eliminado exitosamente.");
+                    } else {
+                        System.out.println("Estudiante no encontrado.");
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("¡Hasta luego!");
+                    break;
+
+                default:
+                    System.out.println("Opción no válida.");
+            }
+        } while (opcion != 5);
+
+        scanner.close();
+    }
+}
+```
+
+---
+
+### **6. Comparación: Arrays vs ArrayList**
+
+| Característica | Arrays | ArrayList |
+|----------------|--------|-----------|
+| **Tamaño** | Fijo (definido al crear) | Dinámico (se ajusta automáticamente) |
+| **Tipo de datos** | Primitivos y objetos | Solo objetos (usa wrapper classes) |
+| **Rendimiento** | Más rápido para acceso directo | Ligeramente más lento |
+| **Métodos** | Limitados | Muchos métodos útiles |
+| **Sintaxis** | `array[index]` | `list.get(index)` |
+| **Memoria** | Menos overhead | Más overhead |
+
+#### **Cuándo usar cada uno:**
+- **Arrays**: Cuando conoces el tamaño exacto y necesitas máximo rendimiento
+- **ArrayList**: Cuando necesitas flexibilidad en el tamaño y métodos de manipulación
+
+---
+
+### **7. Otros métodos útiles de ArrayList**
+
+```java
+ArrayList<Integer> numeros = new ArrayList<>();
+numeros.add(10);
+numeros.add(20);
+numeros.add(30);
+
+// Obtener índice de un elemento
+int indice = numeros.indexOf(20); // Retorna 1
+
+// Verificar si contiene un elemento
+boolean contiene = numeros.contains(25); // Retorna false
+
+// Convertir a array
+Integer[] array = numeros.toArray(new Integer[0]);
+
+// Crear ArrayList desde array
+Integer[] arrayOriginal = {1, 2, 3, 4, 5};
+ArrayList<Integer> listaDesdeArray = new ArrayList<>(Arrays.asList(arrayOriginal));
+
+// Ordenar ArrayList
+Collections.sort(numeros); // Requiere import java.util.Collections;
+```
+
+---
+
 

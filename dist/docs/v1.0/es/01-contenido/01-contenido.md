@@ -1,5 +1,5 @@
 ---
-title: "Clase 1 - Introducción a Java y entorno de desarrollo"
+title: "Introducción a Java y entorno de desarrollo"
 position: 1
 date: 2025-10-13
 ---
