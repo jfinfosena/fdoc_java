@@ -10,8 +10,7 @@ date: 2025-11-20
 https://seia-stalone.vercel.app/
 ```
 
-Códiogo de la evaluación:
-67WDHO3B
+Códiogo de la evaluación: 67WDHO3B
 
 ## Api Key Gemini:
 ```bash
