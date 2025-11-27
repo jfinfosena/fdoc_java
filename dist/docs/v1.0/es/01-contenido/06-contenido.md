@@ -1,8 +1,234 @@
 ---
-title: "Semana 6"
+title: "Constructores, encapsulación y métodos de acceso en Java "
 position: 6
 date: 2026-11-18
 ---
 
-# Semana 6
+## 1. Introducción  
+Una clase Java que **almacena información sensible** (saldo bancario, notas de un alumno, etc.) **debe impedir que valores inválidos lleguen a sus atributos**.  
+Para ello se combinan:
+
+*   **Constructores**: crean objetos en un estado **válido desde el nacimiento**.  
+*   **Encapsulamiento**: ocultar los atributos (`private`) y exponer solo **interfaces controladas**.  
+*   **Métodos de acceso** (`get`/`set`): **puertas de entrada y salida** que validan y transforman la información.
+
+---
+
+## 2. Constructores en profundidad  
+Un constructor **no devuelve nada**, ni siquiera `void`, y **lleva el mismo nombre que la clase**.
+
+### 2.1 Constructor implícito  
+Si no escribes ninguno, Java añade el **constructor por defecto** sin parámetros:
+
+```java
+public class Producto { }   // Constructor implícito: new Producto()
+```
+
+### 2.2 Constructor sin argumentos (explicit)  
+Cuando **necesitas inicializar valores por defecto**:
+
+```java
+public class Producto {
+    private String nombre;
+    private double precio;
+
+    public Producto() {
+        this.nombre = "Sin nombre";
+        this.precio  = 0.0;
+    }
+}
+```
+
+### 2.3 Constructor con parámetros  
+Permite **inicializar con valores concretos** y **validar inmediatamente**:
+
+```java
+public Producto(String nombre, double precio) {
+    setNombre(nombre);   // reutilizo la validación del setter
+    setPrecio(precio);
+}
+```
+
+### 2.5 Constructores por defecto con Builder (opcional avanzado)  
+Para **muchos parámetros opcionales** se usa el patrón *Builder*:
+
+```java
+public class Producto {
+    private final String nombre;
+    private final double precio;
+    private final int stock;
+
+    private Producto(Builder b) {
+        this.nombre = b.nombre;
+        this.precio = b.precio;
+        this.stock  = b.stock;
+    }
+
+    public static class Builder {
+        private String nombre;
+        private double precio;
+        private int stock;
+
+        public Builder nombre(String val) { nombre = val; return this; }
+        public Builder precio(double val) { precio = val; return this; }
+        public Builder stock(int val)   { stock = val; return this; }
+        public Producto build()         { return new Producto(this); }
+    }
+}
+
+// Uso
+Producto p = new Producto.Builder()
+              .nombre("Mouse")
+              .precio(29.99)
+              .stock(100)
+              .build();
+```
+
+---
+
+## 3. Encapsulamiento de atributos  
+Regla de oro: **todos los atributos de estado deben ser `private`**.  
+De esta forma solo la propia clase puede modificarlos directamente.
+
+```java
+public class CuentaBancaria {
+    private String iban;
+    private double saldo;
+    private String titular;
+}
+```
+
+---
+
+## 4. Métodos de acceso (getters y setters)  
+
+### 4.1 Getter  
+Devuelve una **copia o vista inmutable** del dato.
+
+```java
+public String getIban() {
+    return iban;
+}
+
+public double getSaldo() {
+    return saldo;   // primitivo → copia automática
+}
+```
+
+> ⚠️ Si devolvieras objetos mutables (ej. `Date`, `List`) devuelve una copia defensiva.
+
+### 4.2 Setter  
+Valida y asigna. Es la **única vía oficial** para cambiar el valor.
+
+```java
+public void setSaldo(double saldo) {
+    if (saldo < 0) {
+        throw new IllegalArgumentException("El saldo no puede ser negativo");
+    }
+    this.saldo = saldo;
+}
+```
+
+### 4.3 Inmutabilad parcial (solo getter)  
+Cuando un atributo **no debe cambiar después de la construcción**, **no incluyas setter**:
+
+```java
+public class Dni {
+    private final String numero;
+
+    public Dni(String numero) {
+        if (!numero.matches("\\d{8}[A-Z]")) {
+            throw new IllegalArgumentException("Formato incorrecto");
+        }
+        this.numero = numero;
+    }
+
+    public String getNumero() {   // No existe setNumero
+        return numero;
+    }
+}
+```
+
+---
+
+## 5. Ejemplo completo: clase `Alumno`
+
+```java
+package modelo;
+
+public class Alumno {
+    // 1. Atributos encapsulados
+    private String dni;
+    private String nombre;
+    private double notaMedia;
+
+    // 2. Constructores
+    public Alumno() {
+        this("00000000X", "Sin nombre", 0.0);
+    }
+
+    public Alumno(String dni, String nombre, double notaMedia) {
+        setDni(dni);
+        setNombre(nombre);
+        setNotaMedia(notaMedia);
+    }
+
+    public Alumno(Alumno otro) {
+        this.dni = otro.dni;
+        this.nombre = otro.nombre;
+        this.notaMedia = otro.notaMedia;
+    }
+
+    // 3. Getters
+    public String getDni() {
+        return dni;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public double getNotaMedia() {
+        return notaMedia;
+    }
+
+    // 4. Setters con validación
+    public void setDni(String dni) {
+        if (dni == null || !dni.matches("\\d{8}[A-Z]")) {
+            throw new IllegalArgumentException("DNI inválido");
+        }
+        this.dni = dni;
+    }
+
+    public void setNombre(String nombre) {
+        if (nombre == null || nombre.isBlank()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío");
+        }
+        this.nombre = nombre.trim();
+    }
+
+    public void setNotaMedia(double notaMedia) {
+        if (notaMedia < 0 || notaMedia > 10) {
+            throw new IllegalArgumentException("Nota fuera de rango [0-10]");
+        }
+        this.notaMedia = notaMedia;
+    }
+
+    // 5. Otros métodos de negocio
+    public boolean estaAprobado() {
+        return notaMedia >= 5;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Alumno[%s, %s, %.2f]", dni, nombre, notaMedia);
+    }
+}
+```
+
+---
+
+
+
+
 

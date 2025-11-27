@@ -1,8 +1,262 @@
 ---
-title: "Semana 8"
-position: 6
-date: 2025-12-02
+title: "Herencia en Programación Orientada a Objetos (Java)"
+position: 8
+date: 2026-11-25
 ---
+## ¿Qué es la Herencia?
 
-# Semana 8
+La **herencia** es uno de los pilares fundamentales de la Programación Orientada a Objetos (POO). Permite que una clase (llamada **clase hija** o **subclase**) herede atributos y métodos de otra clase (llamada **clase padre** o **superclase**).
+
+### Características principales:
+- **Reutilización de código**: Evita duplicar código común
+- **Jerarquía de clases**: Establece relaciones "es-un" entre objetos
+- **Extensibilidad**: Permite agregar funcionalidad específica a las subclases
+- **Polimorfismo**: Facilita el tratamiento uniforme de objetos relacionados
+
+## Sintaxis en Java
+
+En Java, utilizamos la palabra clave `extends` para establecer herencia:
+
+```java
+class ClasePadre {
+    // Atributos y métodos de la clase padre
+}
+
+class ClaseHija extends ClasePadre {
+    // Atributos y métodos adicionales de la clase hija
+    // Hereda automáticamente todo lo público y protegido del padre
+}
+```
+
+## Ejemplo Básico: Vehículos
+
+### Clase Padre (Superclase)
+
+```java
+public class Vehiculo {
+    protected String marca;
+    protected String modelo;
+    protected int año;
+    protected double velocidad;
+    
+    // Constructor
+    public Vehiculo(String marca, String modelo, int año) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.año = año;
+        this.velocidad = 0.0;
+    }
+    
+    // Métodos comunes a todos los vehículos
+    public void acelerar(double incremento) {
+        velocidad += incremento;
+        System.out.println("Acelerando... Velocidad actual: " + velocidad + " km/h");
+    }
+    
+    public void frenar(double decremento) {
+        velocidad = Math.max(0, velocidad - decremento);
+        System.out.println("Frenando... Velocidad actual: " + velocidad + " km/h");
+    }
+    
+    public void mostrarInfo() {
+        System.out.println("Vehículo: " + marca + " " + modelo + " (" + año + ")");
+    }
+    
+    // Getters
+    public String getMarca() { return marca; }
+    public String getModelo() { return modelo; }
+    public int getAño() { return año; }
+    public double getVelocidad() { return velocidad; }
+}
+```
+
+### Clases Hijas (Subclases)
+
+#### Clase Auto
+
+```java
+public class Auto extends Vehiculo {
+    private int numeroPuertas;
+    private String tipoCombustible;
+    
+    // Constructor que llama al constructor del padre
+    public Auto(String marca, String modelo, int año, int numeroPuertas, String tipoCombustible) {
+        super(marca, modelo, año); // Llamada al constructor del padre
+        this.numeroPuertas = numeroPuertas;
+        this.tipoCombustible = tipoCombustible;
+    }
+    
+    // Método específico de Auto
+    public void encenderAireAcondicionado() {
+        System.out.println("Aire acondicionado encendido en el " + marca + " " + modelo);
+    }
+    
+    // Sobrescritura (Override) del método mostrarInfo
+    @Override
+    public void mostrarInfo() {
+        super.mostrarInfo(); // Llama al método del padre
+        System.out.println("Tipo: Auto");
+        System.out.println("Puertas: " + numeroPuertas);
+        System.out.println("Combustible: " + tipoCombustible);
+    }
+    
+    // Getters específicos
+    public int getNumeroPuertas() { return numeroPuertas; }
+    public String getTipoCombustible() { return tipoCombustible; }
+}
+```
+
+#### Clase Motocicleta
+
+```java
+public class Motocicleta extends Vehiculo {
+    private int cilindrada;
+    private boolean tieneSidecar;
+    
+    public Motocicleta(String marca, String modelo, int año, int cilindrada, boolean tieneSidecar) {
+        super(marca, modelo, año);
+        this.cilindrada = cilindrada;
+        this.tieneSidecar = tieneSidecar;
+    }
+    
+    // Método específico de Motocicleta
+    public void hacerCaballito() {
+        if (velocidad > 20) {
+            System.out.println("¡Haciendo caballito con la " + marca + " " + modelo + "!");
+        } else {
+            System.out.println("Necesitas más velocidad para hacer caballito.");
+        }
+    }
+    
+    @Override
+    public void mostrarInfo() {
+        super.mostrarInfo();
+        System.out.println("Tipo: Motocicleta");
+        System.out.println("Cilindrada: " + cilindrada + "cc");
+        System.out.println("Sidecar: " + (tieneSidecar ? "Sí" : "No"));
+    }
+    
+    public int getCilindrada() { return cilindrada; }
+    public boolean isTieneSidecar() { return tieneSidecar; }
+}
+```
+
+## Conceptos Importantes
+
+### 1. La palabra clave `super`
+
+- **`super()`**: Llama al constructor de la clase padre
+- **`super.metodo()`**: Llama a un método de la clase padre
+- **`super.atributo`**: Accede a un atributo de la clase padre
+
+### 2. Sobrescritura de métodos (`@Override`)
+
+Permite que una subclase proporcione una implementación específica de un método que ya está definido en su superclase.
+
+```java
+@Override
+public void mostrarInfo() {
+    super.mostrarInfo(); // Opcional: llamar al método del padre
+    // Agregar funcionalidad específica
+    System.out.println("Información adicional específica");
+}
+```
+
+### 3. Modificadores de acceso en herencia
+
+- **`public`**: Accesible desde cualquier lugar
+- **`protected`**: Accesible desde la misma clase, subclases y mismo paquete
+- **`private`**: NO heredable, solo accesible desde la misma clase
+- **Sin modificador (package-private)**: Accesible desde el mismo paquete
+
+## Ejemplo de Uso Completo
+
+```java
+public class EjemploHerencia {
+    public static void main(String[] args) {
+        // Crear objetos de diferentes tipos
+        Auto miAuto = new Auto("Toyota", "Corolla", 2023, 4, "Gasolina");
+        Motocicleta miMoto = new Motocicleta("Yamaha", "R1", 2022, 1000, false);
+        
+        System.out.println("=== INFORMACIÓN DE VEHÍCULOS ===");
+        miAuto.mostrarInfo();
+        System.out.println();
+        miMoto.mostrarInfo();
+        
+        System.out.println("\n=== PROBANDO FUNCIONALIDADES ===");
+        
+        // Métodos heredados (disponibles en ambos)
+        miAuto.acelerar(50);
+        miMoto.acelerar(80);
+        
+        // Métodos específicos de cada clase
+        miAuto.encenderAireAcondicionado();
+        miMoto.hacerCaballito();
+        
+        // Polimorfismo: tratar objetos diferentes de manera uniforme
+        System.out.println("\n=== POLIMORFISMO ===");
+        Vehiculo[] vehiculos = {miAuto, miMoto};
+        
+        for (Vehiculo vehiculo : vehiculos) {
+            vehiculo.mostrarInfo(); // Llama al método sobrescrito correspondiente
+            vehiculo.acelerar(20);
+            System.out.println();
+        }
+    }
+}
+```
+
+## Ventajas de la Herencia
+
+1. **Reutilización de código**: Evita duplicación
+2. **Mantenimiento**: Cambios en la clase padre se propagan automáticamente
+3. **Organización**: Crea jerarquías lógicas y comprensibles
+4. **Extensibilidad**: Fácil agregar nuevas funcionalidades
+5. **Polimorfismo**: Permite tratar objetos relacionados de manera uniforme
+
+## Consideraciones Importantes
+
+- Java solo permite **herencia simple** (una clase solo puede extender una clase)
+- Todas las clases en Java heredan implícitamente de `Object`
+- Los constructores NO se heredan, pero se pueden llamar con `super()`
+- Los métodos `private` NO se heredan
+- Los métodos `static` se heredan pero no se pueden sobrescribir
+
+!!! tip "Buena Práctica"
+    Usa herencia cuando existe una relación "es-un" clara. Por ejemplo: "Un Auto ES-UN Vehículo", "Una Motocicleta ES-UN Vehículo".
+
+!!! warning "Cuidado"
+    No abuses de la herencia. A veces la composición ("tiene-un") es más apropiada que la herencia ("es-un").
+
+## Actividades Prácticas
+
+### Ejercicio 1: Sistema de Animales
+Crea una jerarquía de clases para un zoológico:
+- Clase padre `Animal` con atributos: nombre, edad, peso
+- Clases hijas: `Mamifero`, `Ave`, `Reptil`
+- Cada clase hija debe tener atributos y métodos específicos
+- Implementa sobrescritura del método `hacerSonido()`
+
+### Ejercicio 2: Sistema de Figuras Geométricas
+Implementa una jerarquía para figuras geométricas:
+- Clase padre `Figura` con atributos: color, nombre
+- Clases hijas: `Circulo`, `Rectangulo`, `Triangulo`
+- Métodos para calcular área y perímetro en cada clase hija
+- Método `mostrarInformacion()` sobrescrito en cada clase
+
+### Ejercicio 3: Sistema de Productos
+Crea un sistema de productos para una tienda:
+- Clase padre `Producto` con: código, nombre, precio
+- Clases hijas: `ProductoElectronico`, `ProductoAlimenticio`
+- Implementa métodos específicos como `calcularGarantia()` y `verificarVencimiento()`
+
+!!! tip "Consejos para los Ejercicios"
+    - Usa `protected` para atributos que las clases hijas necesiten acceder
+    - Implementa constructores que llamen a `super()`
+    - Sobrescribe métodos cuando necesites comportamiento específico
+    - Usa `@Override` para mayor claridad en el código
+
+
+
+
 

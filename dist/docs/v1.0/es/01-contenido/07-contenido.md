@@ -1,8 +1,376 @@
 ---
-title: "Semana 7"
-position: 6
+title: "Métodos Generales de una Clase en Java"
+position: 7
 date: 2026-11-25
 ---
 
-# Semana 7
+
+## 1. Constructores
+
+### ¿Qué es un constructor?
+Un **constructor** es un método especial dentro de una clase que se utiliza para inicializar objetos. Se ejecuta automáticamente cuando se crea una instancia de la clase con el operador `new`. Los constructores tienen las siguientes características:
+
+- Tienen el **mismo nombre que la clase**.
+- **No tienen tipo de retorno**, ni siquiera `void`.
+- Pueden ser **públicos**, **privados**, o tener otros modificadores de acceso.
+- Si no se define un constructor, Java proporciona un **constructor por defecto** sin parámetros que inicializa los atributos con valores predeterminados.
+
+### Ejemplo: Constructor en un sistema educativo
+Imagina que estás desarrollando un sistema para una universidad en Colombia, donde necesitas gestionar información de estudiantes, como su nombre, número de identificación (por ejemplo, cédula o DNI), y promedio académico.
+
+```java
+public class Estudiante {
+    // Atributos
+    private String nombre;
+    private String numeroIdentificacion;
+    private double promedioAcademico;
+
+    // Constructor
+    public Estudiante(String nombre, String numeroIdentificacion, double promedioAcademico) {
+        this.nombre = nombre;
+        this.numeroIdentificacion = numeroIdentificacion;
+        this.promedioAcademico = promedioAcademico;
+    }
+
+    // Método para mostrar información
+    public void mostrarInformacion() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Número de Identificación: " + numeroIdentificacion);
+        System.out.println("Promedio Académico: " + promedioAcademico);
+    }
+}
+```
+
+En este ejemplo:
+- El constructor `Estudiante` inicializa los atributos `nombre`, `numeroIdentificacion` y `promedioAcademico`.
+- Se usa el operador `this` para diferenciar los parámetros del constructor de los atributos de la clase.
+- El método `mostrarInformacion` permite mostrar los datos del estudiante.
+
+### Uso del constructor
+```java
+public class Main {
+    public static void main(String[] args) {
+        // Crear un objeto Estudiante
+        Estudiante estudiante1 = new Estudiante("María López", "12345678", 8.5);
+        estudiante1.mostrarInformacion();
+    }
+}
+```
+
+**Salida:**
+```
+Nombre: María López
+Número de Identificación: 12345678
+Promedio Académico: 8.5
+```
+
+!!! tip "Constructor por defecto"
+    Si no defines un constructor, Java crea uno automáticamente. Por ejemplo:
+    ```java
+    public Estudiante() {
+        // Atributos con valores por defecto
+        nombre = "";
+        numeroIdentificacion = "";
+        promedioAcademico = 0.0;
+    }
+    ```
+
+---
+
+## 2. Sobrecarga de Métodos y Constructores
+
+### ¿Qué es la sobrecarga?
+La **sobrecarga** (overloading) permite definir múltiples métodos o constructores con el **mismo nombre**, pero con diferentes **parámetros** (en número, tipo o ambos). Esto es útil para ofrecer flexibilidad al usuario de la clase, permitiendo diferentes formas de inicializar un objeto o invocar un método.
+
+### Reglas de la sobrecarga
+- Los métodos o constructores deben tener el **mismo nombre**.
+- Deben diferir en la **cantidad** o el **tipo** de parámetros.
+- El **tipo de retorno** no afecta la sobrecarga (en métodos, no aplica a constructores).
+- Java determina qué método o constructor ejecutar según los argumentos proporcionados.
+
+### Ejemplo: Sobrecarga de constructores
+En el contexto de un sistema educativo, podrías necesitar inicializar un objeto `Estudiante` de diferentes maneras: con todos los datos, solo con nombre e identificación, o con valores por defecto.
+
+```java
+public class Estudiante {
+    private String nombre;
+    private String numeroIdentificacion;
+    private double promedioAcademico;
+
+    // Constructor completo
+    public Estudiante(String nombre, String numeroIdentificacion, double promedioAcademico) {
+        this.nombre = nombre;
+        this.numeroIdentificacion = numeroIdentificacion;
+        this.promedioAcademico = promedioAcademico;
+    }
+
+    // Constructor con nombre e identificación
+    public Estudiante(String nombre, String numeroIdentificacion) {
+        this.nombre = nombre;
+        this.numeroIdentificacion = numeroIdentificacion;
+        this.promedioAcademico = 0.0; // Valor por defecto
+    }
+
+    // Constructor por defecto
+    public Estudiante() {
+        this.nombre = "Sin nombre";
+        this.numeroIdentificacion = "Sin identificación";
+        this.promedioAcademico = 0.0;
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Número de Identificación: " + numeroIdentificacion);
+        System.out.println("Promedio Académico: " + promedioAcademico);
+    }
+}
+```
+
+### Uso de los constructores sobrecargados
+```java
+public class Main {
+    public static void main(String[] args) {
+        // Usar constructor completo
+        Estudiante estudiante1 = new Estudiante("Juan Pérez", "98765432", 9.0);
+        estudiante1.mostrarInformacion();
+
+        // Usar constructor con nombre e identificación
+        Estudiante estudiante2 = new Estudiante("Ana Gómez", "45678912");
+        estudiante2.mostrarInformacion();
+
+        // Usar constructor por defecto
+        Estudiante estudiante3 = new Estudiante();
+        estudiante3.mostrarInformacion();
+    }
+}
+```
+
+**Salida:**
+```
+Nombre: Juan Pérez
+Número de Identificación: 98765432
+Promedio Académico: 9.0
+
+Nombre: Ana Gómez
+Número de Identificación: 45678912
+Promedio Académico: 0.0
+
+Nombre: Sin nombre
+Número de Identificación: Sin identificación
+Promedio Académico: 0.0
+```
+
+### Sobrecarga de métodos
+Además de constructores, puedes sobrecargar métodos. Por ejemplo, un método para calcular el estado académico del estudiante según su promedio o según una escala personalizada.
+
+```java
+public class Estudiante {
+    private String nombre;
+    private String numeroIdentificacion;
+    private double promedioAcademico;
+
+    public Estudiante(String nombre, String numeroIdentificacion, double promedioAcademico) {
+        this.nombre = nombre;
+        this.numeroIdentificacion = numeroIdentificacion;
+        this.promedioAcademico = promedioAcademico;
+    }
+
+    // Método sobrecargado: Estado académico estándar (escala de 0 a 10)
+    public String calcularEstadoAcademico() {
+        if (promedioAcademico >= 6.0) {
+            return "Aprobado";
+        } else {
+            return "Reprobado";
+        }
+    }
+
+    // Método sobrecargado: Estado académico con escala personalizada
+    public String calcularEstadoAcademico(double notaMinimaAprobacion) {
+        if (promedioAcademico >= notaMinimaAprobacion) {
+            return "Aprobado con nota mínima de " + notaMinimaAprobacion;
+        } else {
+            return "Reprobado con nota mínima de " + notaMinimaAprobacion;
+        }
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Número de Identificación: " + numeroIdentificacion);
+        System.out.println("Promedio Académico: " + promedioAcademico);
+    }
+}
+```
+
+### Uso de los métodos sobrecargados
+```java
+public class Main {
+    public static void main(String[] args) {
+        Estudiante estudiante = new Estudiante("Carlos Ramírez", "12345678", 7.5);
+        estudiante.mostrarInformacion();
+
+        // Usar método sin parámetros
+        System.out.println("Estado: " + estudiante.calcularEstadoAcademico());
+
+        // Usar método con escala personalizada
+        System.out.println("Estado (nota mínima 8.0): " + estudiante.calcularEstadoAcademico(8.0));
+    }
+}
+```
+
+**Salida:**
+```
+Nombre: Carlos Ramírez
+Número de Identificación: 12345678
+Promedio Académico: 7.5
+Estado: Aprobado
+Estado (nota mínima 8.0): Reprobado con nota mínima de 8.0
+```
+
+---
+
+## 3. Uso del Operador `this`
+
+### ¿Qué es el operador `this`?
+El operador `this` es una referencia al **objeto actual** de la clase. Se utiliza para:
+
+- **Diferenciar atributos de parámetros**: Cuando los nombres de los parámetros del constructor o método coinciden con los nombres de los atributos de la clase.
+- **Llamar a otros constructores** dentro de la misma clase (constructor chaining).
+- **Pasar el objeto actual** como argumento a otro método.
+
+### Ejemplo: Uso de `this` para diferenciar atributos y parámetros
+En el constructor de la clase `Estudiante`, usamos `this` para evitar ambigüedad entre los parámetros y los atributos.
+
+```java
+public class Estudiante {
+    private String nombre;
+    private String numeroIdentificacion;
+    private double promedioAcademico;
+
+    public Estudiante(String nombre, String numeroIdentificacion, double promedioAcademico) {
+        this.nombre = nombre; // this.nombre se refiere al atributo, nombre al parámetro
+        this.numeroIdentificacion = numeroIdentificacion;
+        this.promedioAcademico = promedioAcademico;
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("Nombre: " + this.nombre); // Uso opcional de this
+        System.out.println("Número de Identificación: " + this.numeroIdentificacion);
+        System.out.println("Promedio Académico: " + this.promedioAcademico);
+    }
+}
+```
+
+### Ejemplo: Uso de `this` para constructor chaining
+El constructor chaining permite reutilizar constructores dentro de la misma clase, reduciendo código duplicado.
+
+```java
+public class Estudiante {
+    private String nombre;
+    private String numeroIdentificacion;
+    private double promedioAcademico;
+
+    // Constructor por defecto
+    public Estudiante() {
+        this("Sin nombre", "Sin identificación", 0.0); // Llama al constructor completo
+    }
+
+    // Constructor con nombre e identificación
+    public Estudiante(String nombre, String numeroIdentificacion) {
+        this(nombre, numeroIdentificacion, 0.0); // Llama al constructor completo
+    }
+
+    // Constructor completo
+    public Estudiante(String nombre, String numeroIdentificacion, double promedioAcademico) {
+        this.nombre = nombre;
+        this.numeroIdentificacion = numeroIdentificacion;
+        this.promedioAcademico = promedioAcademico;
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Número de Identificación: " + numeroIdentificacion);
+        System.out.println("Promedio Académico: " + promedioAcademico);
+    }
+}
+```
+
+### Uso del constructor chaining
+```java
+public class Main {
+    public static void main(String[] args) {
+        Estudiante estudiante1 = new Estudiante(); // Usa constructor por defecto
+        estudiante1.mostrarInformacion();
+
+        Estudiante estudiante2 = new Estudiante("Sofía Martínez", "11223344"); // Usa constructor con nombre e identificación
+        estudiante2.mostrarInformacion();
+    }
+}
+```
+
+**Salida:**
+```
+Nombre: Sin nombre
+Número de Identificación: Sin identificación
+Promedio Académico: 0.0
+
+Nombre: Sofía Martínez
+Número de Identificación: 11223344
+Promedio Académico: 0.0
+```
+
+### Ejemplo: Uso de `this` para pasar el objeto actual
+Supongamos que el sistema educativo necesita registrar a un estudiante en un curso, pasando el objeto `Estudiante` a otro método.
+
+```java
+public class Curso {
+    public void registrarEstudiante(Estudiante estudiante) {
+        System.out.println("Estudiante " + estudiante.getNombre() + " registrado en el curso.");
+    }
+}
+
+public class Estudiante {
+    private String nombre;
+    private String numeroIdentificacion;
+    private double promedioAcademico;
+
+    public Estudiante(String nombre, String numeroIdentificacion, double promedioAcademico) {
+        this.nombre = nombre;
+        this.numeroIdentificacion = numeroIdentificacion;
+        this.promedioAcademico = promedioAcademico;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void inscribirseEnCurso(Curso curso) {
+        curso.registrarEstudiante(this); // Pasa el objeto actual
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Número de Identificación: " + numeroIdentificacion);
+        System.out.println("Promedio Académico: " + promedioAcademico);
+    }
+}
+```
+
+### Uso del método con `this`
+```java
+public class Main {
+    public static void main(String[] args) {
+        Estudiante estudiante = new Estudiante("Lucía Fernández", "55667788", 8.7);
+        Curso curso = new Curso();
+        estudiante.inscribirseEnCurso(curso);
+    }
+}
+```
+
+**Salida:**
+```
+Estudiante Lucía Fernández registrado en el curso.
+```
+
+---
+
 
