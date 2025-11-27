@@ -1,7 +1,7 @@
 ---
 title: "Clases Abstractas en Java"
 position: 10
-date: 2026-11-25
+date: 2025-11-25
 ---
 
 Las clases abstractas en Java son una herramienta poderosa para la programación orientada a objetos, que permite definir la estructura y el comportamiento general de una clase sin tener que implementar todos sus métodos. 

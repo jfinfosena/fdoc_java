@@ -1,5 +1,5 @@
 ---
-title: "Constructores, encapsulación y métodos de acceso en Java "
+title: "Constructores, encapsulación y métodos de acceso en Java"
 position: 6
 date: 2026-11-18
 ---

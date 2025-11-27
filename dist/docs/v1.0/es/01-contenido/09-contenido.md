@@ -1,7 +1,7 @@
 ---
 title: "Herencia en Java - Ejemplo Exhaustivo: Sistema de Empleados"
 position: 9
-date: 2026-11-25
+date: 2025-11-25
 ---
 
 

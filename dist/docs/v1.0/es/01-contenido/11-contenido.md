@@ -1,7 +1,7 @@
 ---
 title: "Interfaces en Java"
 position: 11
-date: 2026-11-25
+date: 2025-11-25
 ---
 
 ## 📚 ¿Qué es una Interfaz?
